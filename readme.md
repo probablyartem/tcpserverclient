@@ -1,6 +1,6 @@
 # Тестовое задание для C++ разработчиков
 
-![NTPro Logo](https://circular-crown-4be.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fdcf4a752-3a96-4204-8215-a79f5ec8aada%2FUntitled.png?id=0a168ae8-0c99-4164-a2bb-0e1936474829&table=block&spaceId=1d73354a-7157-4942-97e3-fda2c5d792e0&width=1540&userId=&cache=v2)
+![NTPro Logo](NTPro-Logo.png)
 
 ## 📈 Легенда
 ---
