@@ -11,12 +11,13 @@ void SendMessage(
     tcp::socket& aSocket,
     const std::string& aId,
     const std::string& aRequestType,
-    const std::string& aMessage)
+    const nlohmann::json& aMessage)
 {
     nlohmann::json req;
     req["UserId"] = aId;
     req["ReqType"] = aRequestType;
-    req["Message"] = aMessage;
+    req["Message"] = aMessage; 
+
 
     std::string request = req.dump();
     boost::asio::write(aSocket, boost::asio::buffer(request, request.size()));
@@ -44,8 +45,63 @@ std::string ProcessRegistration(tcp::socket& aSocket)
     return ReadMessage(aSocket);
 }
 
+void SendBuyRequest(tcp::socket& aSocket, const std::string& userId)
+{
+    int amount;
+    double rate;
+    std::cout << "Enter amount of USD to buy: ";
+    std::cin >> amount;
+    std::cout << "Enter rate (RUB per 1 USD): ";
+    std::cin >> rate;
+
+    nlohmann::json message;
+    message["Amount"] = amount;
+    message["Rate"] = rate;
+
+    SendMessage(aSocket, userId, "Buy", message);
+    std::cout << ReadMessage(aSocket);
+}
+
+void SendSellRequest(tcp::socket& aSocket, const std::string& userId)
+{
+    int amount;
+    double rate;
+    std::cout << "Enter amount of USD to sell: ";
+    std::cin >> amount;
+    std::cout << "Enter rate (RUB per 1 USD): ";
+    std::cin >> rate;
+
+    nlohmann::json message;
+    message["Amount"] = amount;
+    message["Rate"] = rate;
+
+    SendMessage(aSocket, userId, "Sell", message);
+    std::cout << ReadMessage(aSocket);
+}
+
+void ProcessRequests(tcp::socket& aSocket)
+{
+    SendMessage(aSocket, "0", "Process", "");
+    std::cout << ReadMessage(aSocket);
+}
+
+void ShowBalances(tcp::socket& aSocket)
+{
+    SendMessage(aSocket, "0", "Balances", "");
+    std::cout << ReadMessage(aSocket);
+}
+
+void ShowUsers(tcp::socket& aSocket)
+{
+    SendMessage(aSocket, "0", "Users", "");
+    std::cout << ReadMessage(aSocket);
+}
+
+
+
 int main()
 {
+    const int port = 12345; 
     try
     {
         boost::asio::io_service io_service;
@@ -67,7 +123,12 @@ int main()
             // Тут реализовано "бесконечное" меню.
             std::cout << "Menu:\n"
                          "1) Hello Request\n"
-                         "2) Exit\n"
+                         "2) Buy USD\n"
+                         "3) Sell USD\n"
+                         "4) Process Requests\n"
+                         "5) Show Balances\n"
+                         "6) Show Users\n"
+                         "7) Exit\n"
                          << std::endl;
 
             short menu_option_num;
@@ -86,6 +147,31 @@ int main()
                 }
                 case 2:
                 {
+                    SendBuyRequest(s, my_id);
+                    break;
+                }
+                case 3:
+                {
+                    SendSellRequest(s, my_id);
+                    break;
+                }
+                case 4:
+                {
+                    ProcessRequests(s);
+                    break;
+                }
+                case 5:
+                {
+                    ShowBalances(s);
+                    break;
+                }
+                case 6:
+                {
+                    ShowUsers(s);
+                    break;
+                }
+                case 7:
+                {
                     exit(0);
                     break;
                 }
@@ -102,4 +188,4 @@ int main()
     }
 
     return 0;
-}
+}   

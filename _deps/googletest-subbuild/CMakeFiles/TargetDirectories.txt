@@ -1,0 +1,3 @@
+/home/artem/Documents/cpp_test_make/templateofclientservermatching/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+/home/artem/Documents/cpp_test_make/templateofclientservermatching/_deps/googletest-subbuild/CMakeFiles/edit_cache.dir
+/home/artem/Documents/cpp_test_make/templateofclientservermatching/_deps/googletest-subbuild/CMakeFiles/rebuild_cache.dir
