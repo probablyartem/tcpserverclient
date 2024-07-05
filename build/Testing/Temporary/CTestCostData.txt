@@ -1,0 +1,4 @@
+TradingTest.ProcessRequestWithoutTrade 8 0.000214781
+TradingTest.ProcessMatchingRequests 8 0.000204717
+TradingTest.ProcessPartialMatchingRequests 2 0.00113163
+---

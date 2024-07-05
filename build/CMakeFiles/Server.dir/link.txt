@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Server.dir/Server.cpp.o CMakeFiles/Server.dir/core.cpp.o -o Server  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0 

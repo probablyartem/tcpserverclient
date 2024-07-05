@@ -69,9 +69,10 @@ TEST_F(TradingTest, ProcessMatchingRequests) {
 TEST_F(TradingTest, ProcessPartialMatchingRequests) {
     std::string buyerId = core.RegisterNewUser("Buyer");
     std::string sellerId = core.RegisterNewUser("Seller");
-
+    std::string sellerId2 = core.RegisterNewUser("Seller2");
     std::string userName3 = core.GetUserName(buyerId);
     std::string userName4 = core.GetUserName(sellerId);
+    std::string userName5 = core.GetUserName(sellerId2);
 
     Request buyRequest;
     buyRequest.userId = buyerId;
@@ -83,17 +84,28 @@ TEST_F(TradingTest, ProcessPartialMatchingRequests) {
     Request sellRequest;
     sellRequest.userId = sellerId;
     sellRequest.isBuy = false;
-    sellRequest.amount = 50;  // Продаем только 50
+    sellRequest.amount = 50;  
     sellRequest.rate = 70.0;
     sellRequest.timestamp = std::time(nullptr) + 1;
 
+
+    Request sellRequest2;
+    sellRequest2.userId = sellerId2;
+    sellRequest2.isBuy = false;
+    sellRequest2.amount = 50;  
+    sellRequest2.rate = 70.0;
+    sellRequest2.timestamp = std::time(nullptr) + 2;
+
     core.AddRequest(buyRequest);
     core.AddRequest(sellRequest);
+    core.AddRequest(sellRequest2);
     core.ProcessRequests();
 
     std::string balances = core.GetBalances();
-    EXPECT_TRUE(balances.find("Buyer 50 USD -3500.000000 RUB") != std::string::npos);
+    std::cout << "Actual balances: " << balances << std::endl;
+    EXPECT_TRUE(balances.find("Buyer 100 USD -7000.000000 RUB") != std::string::npos);
     EXPECT_TRUE(balances.find("Seller -50 USD 3500.000000 RUB") != std::string::npos);
+    EXPECT_TRUE(balances.find("Seller2 -50 USD 3500.000000 RUB") != std::string::npos);
 
     const auto& requests = core.GetPendingRequests();
     EXPECT_EQ(requests.size(), 0);  // Все заявки должны быть обработаны, даже частично

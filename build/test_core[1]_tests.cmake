@@ -1,0 +1,7 @@
+add_test( TradingTest.ProcessRequestWithoutTrade /home/artem/Documents/cpp_test_make/templateofclientservermatching/build/test_core [==[--gtest_filter=TradingTest.ProcessRequestWithoutTrade]==] --gtest_also_run_disabled_tests)
+set_tests_properties( TradingTest.ProcessRequestWithoutTrade PROPERTIES WORKING_DIRECTORY /home/artem/Documents/cpp_test_make/templateofclientservermatching/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test( TradingTest.ProcessMatchingRequests /home/artem/Documents/cpp_test_make/templateofclientservermatching/build/test_core [==[--gtest_filter=TradingTest.ProcessMatchingRequests]==] --gtest_also_run_disabled_tests)
+set_tests_properties( TradingTest.ProcessMatchingRequests PROPERTIES WORKING_DIRECTORY /home/artem/Documents/cpp_test_make/templateofclientservermatching/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test( TradingTest.ProcessPartialMatchingRequests /home/artem/Documents/cpp_test_make/templateofclientservermatching/build/test_core [==[--gtest_filter=TradingTest.ProcessPartialMatchingRequests]==] --gtest_also_run_disabled_tests)
+set_tests_properties( TradingTest.ProcessPartialMatchingRequests PROPERTIES WORKING_DIRECTORY /home/artem/Documents/cpp_test_make/templateofclientservermatching/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set( test_core_TESTS TradingTest.ProcessRequestWithoutTrade TradingTest.ProcessMatchingRequests TradingTest.ProcessPartialMatchingRequests)
